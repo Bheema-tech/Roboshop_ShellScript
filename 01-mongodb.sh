@@ -18,7 +18,7 @@ then
     echo -e "ERROR: $R ... try with Root access$N" | tee -a $LOG_FILE
     exit 1
 else
-    echo "$G Script is running with Root access$N"
+    echo -e "$G Script is running with Root access$N"
 fi
 
 # Validate Function declration
@@ -32,7 +32,7 @@ VALIDATE(){
     fi
 }
 
-cp mongo.repo /ect/yum.repos.d/mongo.repo | tee -a $LOG_FILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo | tee -a $LOG_FILE
 VALIDATE $? "Mongorepo copying" 
 dnf install mongodb-org -y | tee -a $LOG_FILE
 VALIDATE $? "Mongodb installation"
