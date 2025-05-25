@@ -19,7 +19,7 @@ then
     exit 1
 else
     echo "$G Script is running with Root access$N"
-f1
+fi
 
 # Validate Function declration
 VALIDATE(){
