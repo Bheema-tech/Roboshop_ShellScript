@@ -43,7 +43,7 @@ VALIDATE $? "starting redis service"
 systemctl enable redis &>>$LOG_FILE
 VALIDATE $? "Enabling redis service"
 # remote access allow
-sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis.conf &>>$LOG_FILE
+sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATE $? "Editing conf file to allow remoteaccess" 
 systemctl restart redis | &>>$LOG_FILE
 VALIDATE $? "redis service restarted" 
