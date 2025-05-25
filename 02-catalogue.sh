@@ -44,18 +44,18 @@ then
 else
    echo "user already created.. nothing to do"
 fi
-cut
 cd /app
-rm -rf /app/*   #when we run multiple times, we should not get error, before copying the data to app directopry, better to delete the existing one
+rm -rf /app/*   
+#when we run multiple times, we should not get error, before copying the data to app directopry, better to delete the existing one
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
 VALIDATE $? "downloading the coder"
 unzip  /tmp/catalogue.zip | tee -a $LOG_FILE
 VALIDATE $? "unzipping the data to app directory"
-npm install | tee -a $LOG_FILE
+npm install &>>$LOG_FILE
 VALIDATE $? "installing dependencies"
 cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service | tee -a $LOG_FILE
 VALIDATE $? "copying catalogue service filer"
-systemctl daemon-relolad
+systemctl daemon-reload
 systemctl start catalogue | tee -a $LOG_FILE
 VALIDATE $? "start the catalogue service"
 systemctl enable catalogue | tee -a $LOG_FILE
