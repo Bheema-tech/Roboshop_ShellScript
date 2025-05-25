@@ -40,11 +40,7 @@ systemctl start mongod  | tee -a $LOG_FILE
 VALIDATE $? "starting mongodb service"
 systemctl enable mongod | tee -a $LOG_FILE
 VALIDATE $? "Enabling mongodb service"
-
 # remote access allow
 sed -i 's/127.0.0.01/0.0.0.0/g' /etc/mongod.conf | tee -a $LOG_FILE
 VALIDATE $? "Editing conf file to allow remoteaccess" 
 systemctl restart mognod | tee -a $LOG_FILE
-
-
-
